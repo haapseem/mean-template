@@ -3,19 +3,28 @@ services:
   - docker:dind
 
 stages:
-  - build
   - test
-
-.build:
-  image: docker:latest
-  stage: build
-  before_script:
-    - apk update
-    - apk add --no-cache docker-compose
+  - build_and_test
+  - build
 
 .test:
   image: docker:latest
   stage: test
+  before_script:
+    - apk update
+    - apk add --no-cache docker-compose
+
+.build_and_test:
+  image: docker:latest
+  stage: build_and_test
+  before_script:
+    - apk update
+    - apk add --no-cache docker-compose
+  when: on_failure
+
+.build:
+  image: docker:latest
+  stage: build
   before_script:
     - apk update
     - apk add --no-cache docker-compose

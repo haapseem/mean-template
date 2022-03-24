@@ -1,14 +1,20 @@
 
-build:
-  extends: .build
-  script:
-    - docker login ${CI_REGISTRY_URL} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_APIKEY}
-    - docker-compose build frontend
-    - docker-compose push frontend
-
 test:
   extends: .test
   script:
     - docker login ${CI_REGISTRY_URL} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_APIKEY}
     - docker-compose pull frontend
     - docker-compose run frontend npm run test
+
+build_and_test:
+  extends: .build_and_test
+  script:
+    - docker-compose build frontend
+    - docker-compose run frontend npm run test
+
+build:
+  extends: .build
+  script:
+    - docker login ${CI_REGISTRY_URL} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_APIKEY}
+    - docker-compose build frontend
+    - docker-compose push frontend
