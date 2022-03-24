@@ -1,0 +1,5 @@
+
+build:
+  extends: .build
+  script:
+    - echo "hello world"
