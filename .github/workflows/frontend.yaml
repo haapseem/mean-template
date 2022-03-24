@@ -1,0 +1,15 @@
+
+name: "frontend"
+
+on:
+  push:
+    paths:
+      - "frontend/**"
+      - ".github/workflows/frontend"
+
+jobs:
+  build:
+    runs-on: node:17-alpine
+    steps:
+      - npm i --include=dev
+      - npm build
