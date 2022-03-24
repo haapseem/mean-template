@@ -5,7 +5,7 @@ lint:
     - docker login ${CI_REGISTRY_URL} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_APIKEY}
     - docker-compose pull frontend
     - docker-compose run frontend npm run lint
-    
+
 build_and_lint:
   extends: .build_and_lint
   script:
@@ -31,3 +31,16 @@ build:
     - docker login ${CI_REGISTRY_URL} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_APIKEY}
     - docker-compose build frontend
     - docker-compose push frontend
+
+apidoc:
+  extends: .apidoc
+  script:
+    - git remote set-url origin https://${CI_REGISTRY_USER}:${CI_REGISTRY_APIKEY}@gitlab.com/haapsee/mean-template
+    - git checkout apidoc
+    - git merge master
+    - docker login ${CI_REGISTRY_URL} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_APIKEY}
+    - docker-compose pull frontend
+    - docker-compose run frontend npm run apidoc
+    - mv frontend/apidoc/ docs/frontend/apidoc/
+    - git commit -m "add apidoc"
+    - git push
