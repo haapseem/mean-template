@@ -3,9 +3,7 @@ name: "frontend"
 
 on:
   push:
-    paths:
-      - "frontend/**"
-      - ".github/workflows/frontend"
+    branches: [main]
 
 jobs:
   build:
