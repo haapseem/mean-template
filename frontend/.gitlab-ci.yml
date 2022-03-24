@@ -5,3 +5,10 @@ build:
     - docker login ${CI_REGISTRY_URL} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_APIKEY}
     - docker-compose build frontend
     - docker-compose push frontend
+
+test:
+  extends: .test
+  script:
+    - docker login ${CI_REGISTRY_URL} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_APIKEY}
+    - docker-compose pull frontend
+    - docker-compose run frontend npm run test
