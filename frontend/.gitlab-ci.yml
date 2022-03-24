@@ -1,41 +1,42 @@
 
-lint:
-  extends: .lint
-  script:
-    - docker login ${CI_REGISTRY_URL} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_APIKEY}
-    - docker-compose pull frontend
-    - docker-compose run frontend npm run lint
-
-build_and_lint:
-  extends: .build_and_lint
-  script:
-    - docker-compose build frontend
-    - docker-compose run frontend npm run lint
-
-test:
-  extends: .test
-  script:
-    - docker login ${CI_REGISTRY_URL} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_APIKEY}
-    - docker-compose pull frontend
-    - docker-compose run frontend npm run test
-
-build_and_test:
-  extends: .build_and_test
-  script:
-    - docker-compose build frontend
-    - docker-compose run frontend npm run test
-
-build:
-  extends: .build
-  script:
-    - docker login ${CI_REGISTRY_URL} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_APIKEY}
-    - docker-compose build frontend
-    - docker-compose push frontend
+# lint:
+#   extends: .lint
+#   script:
+#     - docker login ${CI_REGISTRY_URL} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_APIKEY}
+#     - docker-compose pull frontend
+#     - docker-compose run frontend npm run lint
+#
+# build_and_lint:
+#   extends: .build_and_lint
+#   script:
+#     - docker-compose build frontend
+#     - docker-compose run frontend npm run lint
+#
+# test:
+#   extends: .test
+#   script:
+#     - docker login ${CI_REGISTRY_URL} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_APIKEY}
+#     - docker-compose pull frontend
+#     - docker-compose run frontend npm run test
+#
+# build_and_test:
+#   extends: .build_and_test
+#   script:
+#     - docker-compose build frontend
+#     - docker-compose run frontend npm run test
+#
+# build:
+#   extends: .build
+#   script:
+#     - docker login ${CI_REGISTRY_URL} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_APIKEY}
+#     - docker-compose build frontend
+#     - docker-compose push frontend
 
 apidoc:
   extends: .apidoc
   script:
-    - git remote set-url origin https://${CI_REGISTRY_USER}:${CI_REGISTRY_APIKEY}@gitlab.com/haapsee/mean-template
+    - git branch
+    # - git remote set-url origin https://${CI_REGISTRY_USER}:${CI_REGISTRY_APIKEY}@gitlab.com/haapsee/mean-template
     - git checkout apidoc
     - git merge master
     - docker login ${CI_REGISTRY_URL} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_APIKEY}
