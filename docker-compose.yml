@@ -6,5 +6,7 @@ services:
       context: ./frontend
       target: development
       dockerfile: Dockerfile
+    environment:
+      - CHROME_BIN=/usr/bin/chromium-browser
     ports:
       - "4200:4200"
