@@ -8,5 +8,9 @@ services:
       dockerfile: Dockerfile
     environment:
       - CHROME_BIN=/usr/bin/chromium-browser
+    volumes:
+      - ./frontend:/app
+      - /app/dist
+      - /app/node_modules
     ports:
       - "4200:4200"

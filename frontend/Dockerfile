@@ -1,6 +1,7 @@
 FROM node:16-alpine as npmi
 WORKDIR /app
-COPY . .
+COPY package.json package.json
+COPY package-lock.json package-lock.json
 RUN npm install
 
 FROM node:16-alpine as development

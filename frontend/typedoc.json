@@ -1,4 +1,4 @@
 {
   "entryPoints": ["./src/app"],
-  "out": "../docs/frontend"
+  "out": "../docs/frontend/api-doc"
 }
