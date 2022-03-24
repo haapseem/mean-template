@@ -10,4 +10,4 @@ stages:
   stage: build
 
 include:
-  - ./frontend/.gitlab-ci.yml
+  - frontend/.gitlab-ci.yml
