@@ -3,9 +3,27 @@ services:
   - docker:dind
 
 stages:
+  - lint
+  - build_and_lint
   - test
   - build_and_test
   - build
+
+.lint:
+  image: docker:latest
+  stage: lint
+  before_script:
+    - apk update
+    - apk add --no-cache docker-compose
+  allow_failure: true
+
+.build_and_lint:
+  image: docker:latest
+  stage: build_and_lint
+  before_script:
+    - apk update
+    - apk add --no-cache docker-compose
+  when: on_failure
 
 .test:
   image: docker:latest
