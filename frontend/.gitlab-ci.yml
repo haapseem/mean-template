@@ -2,4 +2,5 @@
 build:
   extends: .build
   script:
-    - echo "hello world"
+    - docker-compose build backend
+    - docker-compose push backend

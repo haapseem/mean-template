@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  frontend:
+    image: registry.gitlab.com/haapsee/mean-template:development
+    build:
+      context: ./frontend
+      target: development
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
