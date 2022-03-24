@@ -1,0 +1,13 @@
+
+services:
+  - docker:dind
+
+stages:
+  - build
+
+.build:
+  image: docker/compose:latest
+  stage: build
+
+include:
+  - ./frontend/.gitlab-ci.yml
