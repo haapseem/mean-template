@@ -6,8 +6,11 @@ stages:
   - build
 
 .build:
-  image: docker/compose:latest
+  image: docker:latest
   stage: build
+  before_script:
+    - apk update
+    - apk add --no-cache docker-compose
 
 include:
   - frontend/.gitlab-ci.yml
