@@ -9,7 +9,16 @@ on:
 
 jobs:
   build:
-    runs-on: node:17-alpine
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [17.x]
+
     steps:
-      - npm i --include=dev
-      - npm build
+      - uses: actions/checkout@v2
+      - name: Use Node.js version ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm run test
